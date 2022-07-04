@@ -4,7 +4,7 @@ Kibank is a command line application for listing, extracting and creating bank
 files used by [Kilohearts](https://kilohearts.com) products like
 [Phase Plant](https://kilohearts.com/products/phase_plant),
 [Snap Heap](https://kilohearts.com/products/multipass) and
-[Multipass](https://kilohearts.com/products/multipass) as well as any snap in.
+[Multipass](https://kilohearts.com/products/multipass) as well as any Snap In.
 
 This application was developed independently by Sheldon Young. Kibank is *not* 
 a Kilohearts product, please do not contact them for support.
@@ -93,7 +93,7 @@ Additional information about how to use `kibank` is available with the `--help` 
 
 ```console
 $ kibank --help
-kibank 0.1.0
+kibank 0.1.2
 Sheldon Young <sheldon@softdev.ca>
 Tool for Kilohearts banks
 
@@ -162,7 +162,8 @@ kibank = { version = "0", default-features = false }
 ## Issues
 
 If you have any problems with or questions about this project, please contact
-us through by creating a [GitHub issue](issues).
+us through by creating a 
+[GitHub issue](https://github.com/softdevca/kibank/issues).
 
 ## Contributing
 
@@ -170,8 +171,9 @@ You are invited to contribute to new features, fixes, or updates, large or
 small; we are always thrilled to receive pull requests, and do our best to
 process them as fast as we can.
 
-Before you start to code, we recommend discussing your plans through a [GitHub
-issue](issues), especially for more ambitious contributions. This gives other
+Before you start to code, we recommend discussing your plans through a
+[GitHub issue](https://github.com/softdevca/kibank/issues), especially for more
+ambitious contributions. This gives other
 contributors a chance to point you in the right direction, give you feedback on
 your design, and help you find out if someone else is working on the same thing.
 

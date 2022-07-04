@@ -31,7 +31,7 @@ fi
 commit_msg="Update CHANGELOG for $VERSION"
 
 TAG="v$VERSION"
-git cliff --with-commit "$commit_msg" -o CHANGELOG.md
+git cliff --tag "$TAG" --with-commit "$commit_msg" -o CHANGELOG.md
 
 git add CHANGELOG.md && git commit -m "$commit_msg"
 
