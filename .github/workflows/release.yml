@@ -1,0 +1,59 @@
+name: Release
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags:
+      - v[0-9]+.*
+
+jobs:
+  # See https://github.com/taiki-e/create-gh-release-action
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: taiki-e/create-gh-release-action@v1
+        with:
+          # (Optional) Path to changelog.
+          changelog: CHANGELOG.md
+          # (Optional) Reject releases from commits not contained in branches
+          # that match the specified pattern (regular expression)
+          branch: main
+          draft: true
+        env:
+          # (Required) GitHub token for creating GitHub Releases.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # See https://github.com/marketplace/actions/build-and-upload-rust-binary-to-github-releases
+  upload-assets:
+    name: ${{ matrix.target }}
+    if: github.repository_owner == 'softdevca'
+    needs:
+      - create-release
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-unknown-linux-gnu
+          - target: aarch64-unknown-linux-gnu
+          - target: x86_64-apple-darwin
+            os: macos-latest
+          - target: aarch64-apple-darwin
+            os: macos-latest
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+          - target: aarch64-pc-windows-msvc
+            os: windows-latest
+    runs-on: ${{ matrix.os || 'ubuntu-latest' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: taiki-e/github-actions/install-rust@main
+        with:
+          toolchain: stable
+      - uses: taiki-e/upload-rust-binary-action@v1
+        with:
+          bin: kibank
+          target: ${{ matrix.target }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,9 @@
+{
+    "id": "author.title",
+    "name": "Title",
+    "author": "Author",
+    "description": "Description",
+    "autoId": "true",
+    "backgroundPath": "",
+    "content": ""
+}

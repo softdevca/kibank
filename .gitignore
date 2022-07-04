@@ -1,0 +1,11 @@
+## File system
+.DS_Store
+desktop.ini
+
+## Editor and development environments
+*.swp
+/.idea
+/.vscode
+
+## Build output
+/target
