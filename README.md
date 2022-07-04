@@ -11,6 +11,11 @@ a Kilohearts product, please do not contact them for support.
 
 ## Installation
 
+### Binaries
+
+Binaries are available for several platforms from 
+[GitHub releases](https://github.com/softdevca/kibank/releases).
+
 ### From crates.io
 
 To install this application from [crates.io](https://crates.io/crates/kibank)
