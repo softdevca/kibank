@@ -2,7 +2,7 @@
 
 [package]
 name = "kibank"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Sheldon Young <sheldon@softdev.ca>"]
 description = "Tool for Kilohearts banks"
 license = "Apache-2.0"

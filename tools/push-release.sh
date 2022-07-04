@@ -28,10 +28,10 @@ fi
 # should include information about the next release and yet
 # still be included in it.
 
-commit_msg="chore(release): Update CHANGELOG for $VERSION"
+commit_msg="Update CHANGELOG for $VERSION"
 
 TAG="v$VERSION"
-git cliff --tag "$TAG" --with-commit "$commit_msg" -o CHANGELOG.md
+git cliff --with-commit "$commit_msg" -o CHANGELOG.md
 
 git add CHANGELOG.md && git commit -m "$commit_msg"
 
