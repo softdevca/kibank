@@ -21,7 +21,7 @@ jobs:
           # (Optional) Reject releases from commits not contained in branches
           # that match the specified pattern (regular expression)
           branch: main
-          draft: true
+          draft: false
         env:
           # (Required) GitHub token for creating GitHub Releases.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
