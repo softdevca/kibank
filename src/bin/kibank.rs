@@ -39,14 +39,14 @@ fn main() -> Result<()> {
                         .help("Title of the new bank")
                         .long("name")
                         .short('n')
-                        .takes_value(true),
+                        .num_args(1),
                 )
                 .arg(
                     Arg::new("author")
                         .help("Creator of the new bank")
                         .long("author")
                         .short('a')
-                        .takes_value(true),
+                        .num_args(1),
                 )
                 .arg(
                     Arg::new("description")
@@ -54,7 +54,7 @@ fn main() -> Result<()> {
                         .long("description")
                         .alias("desc")
                         .short('d')
-                        .takes_value(true),
+                        .num_args(1),
                 )
                 .arg(
                     Arg::new("id")
@@ -62,7 +62,7 @@ fn main() -> Result<()> {
                         .long("id")
                         .short('i')
                         .hide(true)
-                        .takes_value(true),
+                        .num_args(1),
                 )
                 //
                 // These hash and version fields occur in the metadata in the
@@ -75,14 +75,14 @@ fn main() -> Result<()> {
                         .help("Version number of the new bank")
                         .long("version")
                         .value_parser(value_parser!(u32))
-                        .takes_value(true)
+                        .num_args(1)
                         .hide(true),
                 )
                 .arg(
                     Arg::new("hash")
                         .help("Hash digest for new bank in hex, 160 bits")
                         .long("hash")
-                        .takes_value(true)
+                        .num_args(1)
                         .hide(true),
                 )
                 //
@@ -98,7 +98,7 @@ fn main() -> Result<()> {
                         .help("Files and directories to add to the bank")
                         .value_hint(ValueHint::AnyPath)
                         .value_parser(OsStringValueParser::new())
-                        .multiple_values(true)
+                        .num_args(1..)
                         .required(true),
                 ),
         )
@@ -380,7 +380,7 @@ fn extract(args: &ArgMatches) -> Result<()> {
             })
             .collect::<Vec<u8>>();
 
-        let item_path = Path::from_raw_bytes(platform_path)?;
+        let item_path = Path::assert_from_raw_bytes(platform_path);
         if item_path.is_absolute() {
             return Err(anyhow!(
                 "File {} is absolute and cannot be extracted",
