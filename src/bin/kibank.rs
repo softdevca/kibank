@@ -402,7 +402,7 @@ fn extract(args: &ArgMatches) -> Result<()> {
 
             // Create missing intermediate directories
             if let Some(parent_dir) = dest_path.parent() {
-                fs::create_dir_all(&parent_dir).with_context(|| {
+                fs::create_dir_all(parent_dir).with_context(|| {
                     format!("Cannot create parent directory {}", parent_dir.display())
                 })?;
             }
