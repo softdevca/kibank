@@ -10,7 +10,7 @@ jobs:
     name: Lint package
     steps:
       - uses: actions/checkout@v3
-      - uses: qernal/github-actions-rust-clippy@v2
+      - uses: qernal/github-actions-rust-clippy@v2.0.2
         with:
 #          args: "--verbose"
 #          path_glob: "**/src"
