@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: qernal/github-actions-rust-clippy@v2.0.2
-#        with:
+        with:
 #          args: "--verbose"
 #          path_glob: "**/src"
 #          git_ssh_key: "${{ secrets.base64_ssh_key }}" # Must be base64 encoded and a valid RSA key
