@@ -64,12 +64,10 @@ fn main() -> Result<()> {
                         .hide(true)
                         .num_args(1),
                 )
-                //
                 // These hash and version fields occur in the metadata in the
                 // Kilohearts factory content banks but not those made with
                 // Kilohearts Bank Maker. These fields is not well understood
                 // so these options are hidden.
-                //
                 .arg(
                     Arg::new("version")
                         .help("Version number of the new bank")
@@ -177,7 +175,6 @@ fn main() -> Result<()> {
     match cli_matches.subcommand() {
         Some(("create", args)) => create(args),
         Some(("extract", args)) => extract(args),
-        Some(("gui", app)) => extract(app),
         Some(("info", args)) => info(args),
         Some(("list", args)) => list(args),
         _ => Err(anyhow!("Missing command (-h for help)")),
@@ -205,7 +202,6 @@ fn create(args: &ArgMatches) -> Result<()> {
     let dir_entries = args
         .get_many::<OsString>("IN_FILES")
         .unwrap_or_default()
-        .into_iter()
         .flat_map(walkdir::WalkDir::new);
     for entry in dir_entries {
         match entry {
@@ -459,7 +455,7 @@ fn list(args: &ArgMatches) -> Result<()> {
         if item.is_directory() {
             // Add a trailing slash that matches what is found in the banks,
             // not what's used by the operating system.
-            print!("{}", PATH_SEPARATOR);
+            print!("{PATH_SEPARATOR}");
         }
         println!();
     }
