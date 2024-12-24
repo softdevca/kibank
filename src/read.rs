@@ -23,7 +23,7 @@ pub struct Item<'a> {
 }
 
 /// Read a Kilohearts bank file.
-impl<'a> Item<'a> {
+impl Item<'_> {
     #[must_use]
     pub fn is_directory(&self) -> bool {
         self.location.data_size == 0
@@ -219,7 +219,7 @@ impl<'a, ReaderType: Read + Seek + BufRead> BankReader<'a, ReaderType> {
     }
 }
 
-impl<'a> BankReader<'a, BufReader<File>> {
+impl BankReader<'_, BufReader<File>> {
     /// # Errors
     ///
     /// Will return `Err` if the path cannot be opened as a file.
