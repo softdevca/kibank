@@ -198,7 +198,7 @@ impl<WriterType: Write> BankWriter<WriterType> {
             .iter()
             .map(|kind| {
                 // All the filenames and directory names for the kind.
-                let dir_name_len = kind.directory().map_or(0, |dir| dir.as_bytes().len() + 1);
+                let dir_name_len = kind.directory().map_or(0, |dir| dir.len() + 1);
 
                 let file_names_len = self
                     .items

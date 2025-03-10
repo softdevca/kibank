@@ -171,7 +171,7 @@ impl<'a, ReaderType: Read + Seek + BufRead> BankReader<'a, ReaderType> {
         Ok(BankReader { inner, items })
     }
 
-    /// All of the items in the bank.
+    /// All the items in the bank.
     pub fn items(&self) -> Vec<Item<'a>> {
         self.items.clone()
     }

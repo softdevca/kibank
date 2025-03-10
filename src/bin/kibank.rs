@@ -66,7 +66,7 @@ fn main() -> Result<()> {
                 )
                 // These hash and version fields occur in the metadata in the
                 // Kilohearts factory content banks but not those made with
-                // Kilohearts Bank Maker. These fields is not well understood
+                // Kilohearts Bank Maker. These fields are not well understood
                 // so these options are hidden.
                 .arg(
                     Arg::new("version")
