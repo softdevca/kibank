@@ -15,4 +15,4 @@ jobs:
 #          args: "--verbose"
 #          path_glob: "**/src"
 #          git_ssh_key: "${{ secrets.base64_ssh_key }}" # Must be base64 encoded and a valid RSA key
-          rust_version: 1.75
+          rust_version: 1.85

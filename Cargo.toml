@@ -2,7 +2,7 @@
 
 [package]
 name = "kibank"
-version = "1.1.5"
+version = "1.1.6"
 authors = ["Sheldon Young <sheldon@softdev.ca>"]
 description = "Tool for Kilohearts banks"
 license = "MIT OR Apache-2.0"
@@ -13,6 +13,9 @@ keywords = ["cli", "audio", "synth", "presets"]
 
 edition = "2024"
 publish = true
+
+# Rust version should match the actions in `.github/workflows/`
+rust-version = "1.85"
 
 [features]
 default = ["application"]
