@@ -8,9 +8,11 @@ fn extensions() {
     assert_eq!(ItemKind::Metadata.extensions(), vec!["json"]);
 
     // All kinds must have at least one extension.
-    assert!(ItemKind::all()
-        .iter()
-        .all(|kind| !kind.extensions().is_empty()));
+    assert!(
+        ItemKind::all()
+            .iter()
+            .all(|kind| !kind.extensions().is_empty())
+    );
 }
 
 #[test]

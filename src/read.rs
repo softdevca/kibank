@@ -9,7 +9,7 @@ use byteorder::{LittleEndian, ReadBytesExt};
 use log::{debug, trace};
 
 use crate::{
-    Location, Metadata, BACKGROUND_FILE_STEM, CORRUPTION_CHECK_BYTES, FILE_ID, FORMAT_VERSION,
+    BACKGROUND_FILE_STEM, CORRUPTION_CHECK_BYTES, FILE_ID, FORMAT_VERSION, Location, Metadata,
 };
 
 #[derive(Clone, Debug)]
@@ -100,7 +100,9 @@ impl<'a, ReaderType: Read + Seek + BufRead> BankReader<'a, ReaderType> {
             let file_name_offset = inner.read_u64::<LittleEndian>()?;
             let data_offset = inner.read_u64::<LittleEndian>()?;
             let data_size = inner.read_u64::<LittleEndian>()?;
-            trace!("File name offset is {file_name_offset}, data offset is {data_offset}, daa size is {data_size}");
+            trace!(
+                "File name offset is {file_name_offset}, data offset is {data_offset}, daa size is {data_size}"
+            );
             locations.push(Location {
                 file_name_offset,
                 data_offset,
@@ -111,7 +113,9 @@ impl<'a, ReaderType: Read + Seek + BufRead> BankReader<'a, ReaderType> {
         // File names
         let file_name_block_length = inner.read_u64::<LittleEndian>()?;
         let file_name_block_start = inner.stream_position()?;
-        debug!("File name block length is {file_name_block_length} starting at {file_name_block_start}");
+        debug!(
+            "File name block length is {file_name_block_length} starting at {file_name_block_start}"
+        );
 
         let mut items = Vec::with_capacity(locations.len());
         for location in locations {
@@ -123,21 +127,17 @@ impl<'a, ReaderType: Read + Seek + BufRead> BankReader<'a, ReaderType> {
             // This guarantees the file name will never contain a null.
             let read_count = inner.read_until(0_u8, &mut file_name_bytes)?;
             if read_count == 0 {
-                return Err(Error::new(
-                    ErrorKind::Other,
+                return Err(Error::other(
                     "Zero length read of file name at position {file_name_pos}",
                 ));
             }
 
             // Ensure the file name is within bounds.
             if file_name_pos + read_count as u64 > file_name_block_start + file_name_block_length {
-                return Err(Error::new(
-                    ErrorKind::Other,
-                    "Read past the end of the file name block",
-                ));
+                return Err(Error::other("Read past the end of the file name block"));
             }
 
-            // Remove the trailing null, which won't be there if we hit the end fo the file.
+            // Remove the trailing null, which won't be there if we hit the end of the file.
             if let Some(0_u8) = file_name_bytes.last() {
                 file_name_bytes.pop();
             }
@@ -164,7 +164,7 @@ impl<'a, ReaderType: Read + Seek + BufRead> BankReader<'a, ReaderType> {
                     String::from_utf8_lossy(&window[0].path_bytes),
                     String::from_utf8_lossy(&window[1].path_bytes)
                 );
-                return Err(Error::new(ErrorKind::Other, msg));
+                return Err(Error::other(msg));
             }
         }
 

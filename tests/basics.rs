@@ -1,7 +1,7 @@
 use std::io::Cursor;
 
-use kibank::write::BankWriter;
 use kibank::Metadata;
+use kibank::write::BankWriter;
 
 /// Must not be able to add to a bank once it has been written.
 #[test]

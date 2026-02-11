@@ -1,3 +1,7 @@
+[![crates.io](https://img.shields.io/crates/v/kibank.svg)](https://crates.io/crates/kibank)
+[![documentation](https://docs.rs/kibank/badge.svg)](https://docs.rs/kibank)
+[![MIT/Apache-2.0 licensed](https://img.shields.io/crates/l/kibank.svg)](LICENSE-MIT)
+
 # Kibank
 
 Kibank is a command line application for listing, extracting and creating bank
@@ -161,7 +165,7 @@ in your own Rust applications. The `kibank` crate on
 
 ```toml
 [dependencies]
-kibank = { version = "0", default-features = false }
+kibank = { version = "1", default-features = false }
 ```
 
 ## Issues
@@ -173,13 +177,13 @@ us through by creating a
 ## Contributing
 
 You are invited to contribute to new features, fixes, or updates, large or
-small; we are always thrilled to receive pull requests, and do our best to
+small; we are always thrilled to receive pull requests and do our best to
 process them as fast as we can.
 
 Before you start to code, we recommend discussing your plans through a
 [GitHub issue](https://github.com/softdevca/kibank/issues), especially for more
 ambitious contributions. This gives other
-contributors a chance to point you in the right direction, give you feedback on
+contributors a chance to point you in the right direction, gives you feedback on
 your design, and help you find out if someone else is working on the same thing.
 
 The copyrights of contributions to this project are retained by their
@@ -188,14 +192,10 @@ project.
 
 ## License
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the 
-License at
-
-http://www.apache.org/licenses/LICENSE-2.0
+Licensed under the MIT or Apache License, Version 2.0; you may 
+not use this file except in compliance with either License. 
 
 Unless required by applicable law or agreed to in writing, software distributed
 under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
-

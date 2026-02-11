@@ -15,11 +15,11 @@ pub mod write;
 /// First bytes that identify the kind of the file.
 const FILE_ID: &[u8] = &[137_u8, b'k', b'H', b's'];
 
-/// Every bank contains these characters so it seems logical they identify
+/// Every bank contains these characters, so it seems logical they identify
 /// something about the format.
 const FORMAT_VERSION: &[u8] = "Bank0001".as_bytes();
 
-/// First part the background image file name without the trailing dot.
+/// The first part the background image file name without the trailing dot.
 pub const BACKGROUND_FILE_STEM: &str = "background";
 
 /// These bytes are written as part of the header to check to detect incorrect
@@ -213,7 +213,7 @@ impl ItemKind {
             return Some(ItemKind::Background);
         }
 
-        // Match file name extension to see if it should be included in the bank.
+        // Match the file name extension to see if it should be included in the bank.
         path.as_ref().extension().and_then(|extension| {
             ItemKind::all().into_iter().find(|kind| {
                 kind.extensions()
@@ -272,7 +272,7 @@ impl Metadata {
 
 #[derive(Clone, Debug)]
 struct Location {
-    /// From start of file name block
+    /// From the start of file name block
     file_name_offset: u64,
 
     /// From the start of the file

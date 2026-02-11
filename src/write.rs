@@ -2,7 +2,7 @@ use std::collections::BTreeSet;
 use std::ffi::{OsStr, OsString};
 use std::fs;
 use std::io;
-use std::io::{Error, ErrorKind, Write};
+use std::io::{Error, Write};
 use std::mem::size_of;
 use std::path::Path;
 
@@ -10,7 +10,7 @@ use byteorder::{LittleEndian, WriteBytesExt};
 use log::debug;
 
 use crate::{
-    ItemKind, Location, Metadata, CORRUPTION_CHECK_BYTES, FILE_ID, FORMAT_VERSION, PATH_SEPARATOR,
+    CORRUPTION_CHECK_BYTES, FILE_ID, FORMAT_VERSION, ItemKind, Location, Metadata, PATH_SEPARATOR,
 };
 
 pub struct Item {
@@ -58,8 +58,7 @@ impl<WriterType: Write> BankWriter<WriterType> {
     /// Will return `Err` if the bank has already been written
     pub fn add(&mut self, kind: ItemKind, file_name: &OsStr, contents: Vec<u8>) -> io::Result<()> {
         if self.written {
-            return Err(Error::new(
-                ErrorKind::Other,
+            return Err(Error::other(
                 "Cannot add to a bank that has already been written",
             ));
         }
@@ -105,7 +104,7 @@ impl<WriterType: Write> BankWriter<WriterType> {
     ///
     /// Will return `Err` if the bank has already been written
     pub fn add_metadata(&mut self, metadata: &Metadata) -> io::Result<()> {
-        // Create the ID from the author and name if there isn't one.
+        // Create the ID from the author and name if there is none.
         let contents = if metadata.id.is_empty() {
             let mut id_parts = Vec::with_capacity(2);
             let author_part = Metadata::sanitize_id(&metadata.author);
@@ -154,10 +153,7 @@ impl<WriterType: Write> BankWriter<WriterType> {
         // The file is written in one pass, without seeking backwards, to allow
         // the possibility of streaming the output.
         if self.written {
-            return Err(Error::new(
-                ErrorKind::Other,
-                "The bank has already been written",
-            ));
+            return Err(Error::other("The bank has already been written"));
         }
 
         // Include metadata if it hasn't been provided.

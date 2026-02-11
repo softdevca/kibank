@@ -3,7 +3,7 @@ use std::io::Cursor;
 
 use kibank::read::BankReader;
 use kibank::write::BankWriter;
-use kibank::{ItemKind, BACKGROUND_FILE_STEM};
+use kibank::{BACKGROUND_FILE_STEM, ItemKind};
 
 #[test]
 fn png() {

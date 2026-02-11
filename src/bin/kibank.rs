@@ -2,25 +2,28 @@ use std::collections::HashSet;
 use std::ffi::{OsStr, OsString};
 use std::fs;
 use std::fs::File;
-use std::path::{Path, PathBuf, MAIN_SEPARATOR};
+use std::path::{MAIN_SEPARATOR, Path, PathBuf};
 
-use anyhow::{anyhow, Context, Result};
+use anyhow::{Context, Result, anyhow};
 use clap::builder::{ArgAction, OsStringValueParser};
 use clap::{
-    crate_authors, crate_description, crate_name, crate_version, value_parser, Arg, ArgMatches,
-    Command, ValueHint,
+    Arg, ArgMatches, Command, ValueHint, crate_authors, crate_description, crate_version,
+    value_parser,
 };
-use log::{debug, info, warn, LevelFilter};
+use log::{LevelFilter, debug, info, warn};
 use os_str_bytes::OsStrBytes;
 use simplelog::{ColorChoice, ConfigBuilder, TermLogger, TerminalMode};
 
 use kibank::read::BankReader;
 use kibank::write::BankWriter;
-use kibank::{ItemKind, Metadata, BACKGROUND_FILE_STEM, PATH_SEPARATOR};
+use kibank::{BACKGROUND_FILE_STEM, ItemKind, Metadata, PATH_SEPARATOR};
 
 fn main() -> Result<()> {
     // Command line arguments
-    let app = Command::new(crate_name!())
+    let program_name = std::env::args()
+        .next()
+        .unwrap_or(env!("CARGO_PKG_NAME").to_string());
+    let app = Command::new(program_name)
         .version(crate_version!())
         .author(crate_authors!())
         .about(crate_description!())
@@ -66,7 +69,7 @@ fn main() -> Result<()> {
                 )
                 // These hash and version fields occur in the metadata in the
                 // Kilohearts factory content banks but not those made with
-                // Kilohearts Bank Maker. These fields are not well understood
+                // Kilohearts Bank Maker. These fields are not well-
                 // so these options are hidden.
                 .arg(
                     Arg::new("version")
@@ -342,7 +345,7 @@ fn create(args: &ArgMatches) -> Result<()> {
 
 /// Extract the contents of the bank. Existing files will be overwritten.
 fn extract(args: &ArgMatches) -> Result<()> {
-    // Default destination is the current directory
+    // The default destination is the current directory
     let dest_dir = match args.get_one::<OsString>("dest") {
         None => std::env::current_dir()?,
         Some(osstr) => PathBuf::from(osstr),

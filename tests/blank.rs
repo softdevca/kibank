@@ -15,7 +15,7 @@ fn create_blank() -> io::Result<Cursor<Vec<u8>>> {
 }
 
 fn verify_blank<ReaderType: Read + Seek + BufRead>(reader: &mut BankReader<ReaderType>) {
-    // First and only item is the metadata
+    // The first and only item is the metadata
     let items = reader.items();
     let metadata_item = items.first().unwrap();
     assert!(metadata_item.is_metadata_file());
